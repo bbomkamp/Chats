@@ -14,6 +14,7 @@
 		40704EBF29A9B18E008E8BAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40704EBE29A9B18E008E8BAE /* GoogleService-Info.plist */; };
 		40704EC229A9B2F9008E8BAE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 40704EC129A9B2F9008E8BAE /* FirebaseAuth */; };
 		40704EC429A9B2F9008E8BAE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 40704EC329A9B2F9008E8BAE /* FirebaseStorage */; };
+		40704ECC29A9C6E2008E8BAE /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40704ECB29A9C6E2008E8BAE /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		40704EB429A9B176008E8BAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40704EB729A9B176008E8BAE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		40704EBE29A9B18E008E8BAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		40704ECB29A9C6E2008E8BAE /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				40704EBE29A9B18E008E8BAE /* GoogleService-Info.plist */,
 				40704EB429A9B176008E8BAE /* Assets.xcassets */,
 				40704EB629A9B176008E8BAE /* Preview Content */,
+				40704ECB29A9C6E2008E8BAE /* ImagePicker.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40704ECC29A9C6E2008E8BAE /* ImagePicker.swift in Sources */,
 				40704EB329A9B176008E8BAE /* LoginView.swift in Sources */,
 				40704EB129A9B176008E8BAE /* ChatsApp.swift in Sources */,
 			);

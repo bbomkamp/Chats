@@ -14,6 +14,7 @@ struct LoginView: View {
     @State var isLoginMode = false
     @State var email = ""
     @State var password = ""
+    @State var shouldShowImagePicker = false
     
    
     
@@ -32,11 +33,25 @@ struct LoginView: View {
                     
                     if !isLoginMode {
                         Button {
-                            
+                            shouldShowImagePicker.toggle()
                         } label : {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 64))
-                                .padding()
+                            
+                            VStack {
+                                if let image = self.image {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .frame(width: 128, height: 128)
+                                        .cornerRadius(64)
+                                        .scaledToFill()
+                                }else {
+                                    Image(systemName: "person.fill")
+                                        .font(.system(size: 64))
+                                        .padding()
+                                }
+                            }
+                            .overlay(RoundedRectangle(cornerRadius: 64)
+                                .stroke(Color.black, lineWidth: 3))
+                            
                         }
                     }
                     
@@ -75,7 +90,13 @@ struct LoginView: View {
             .background(Color(.init(white: 0, alpha: 0.05))
             .ignoresSafeArea())
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
+            ImagePicker(image: $image)
+        }
     }
+    
+    @State var image: UIImage?
     
     private func handleAction() {
         if isLoginMode {
@@ -100,6 +121,8 @@ struct LoginView: View {
             print("Successfully created user: \(result?.user.uid ?? "")")
             
             self.loginStatusMessage = "Successfully created user: \(result?.user.uid ?? "")"
+            
+            
         }
     }
     
