@@ -9,19 +9,24 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 
-struct ChatUser {
-    let uid, email, profileImageUrl: String
-}
+
+
 class MainMessagesViewModel: ObservableObject {
     
     @Published var errorMessage = ""
     @Published var chatUser: ChatUser?
+    @Published var isUserCurrentlyLoggedOut = false
     
     init() {
+        // FullScreen Covers need this
+        DispatchQueue.main.async {
+            self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
+        }
+        
         fetchCurrentUser()
     }
     
-    private func fetchCurrentUser() {
+    func fetchCurrentUser() {
         
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
@@ -42,13 +47,18 @@ class MainMessagesViewModel: ObservableObject {
                 return
                 
             }
-            let uid = data["uid"] as? String ?? ""
-            let email = data["email"] as? String ?? ""
-            let profileImageUrl = data["profileImageUrl"] as? String ?? ""
-            self.chatUser = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
             
+            self.chatUser = .init(data: data)
+             
             
         }
+    }
+    
+    
+    
+    func handleSignOut() {
+        isUserCurrentlyLoggedOut.toggle()
+        try? FirebaseManager.shared.auth.signOut()
     }
     
 }
@@ -82,7 +92,7 @@ struct MainMessagesView: View {
                 .clipped()
                 .cornerRadius(50)
                 .overlay(RoundedRectangle(cornerRadius: 44)
-                            .stroke(Color(.label), lineWidth: 1)
+                    .stroke(Color(.label), lineWidth: 1)
                 )
                 .shadow(radius: 5)
             
@@ -117,9 +127,16 @@ struct MainMessagesView: View {
             .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
                 .destructive(Text("Sign Out"), action: {
                     print("handle sign out")
+                    vm.handleSignOut()
                 }),
-                    .cancel()
+                .cancel()
             ])
+        }
+        .fullScreenCover(isPresented: $vm.isUserCurrentlyLoggedOut, onDismiss: nil) {
+            LoginView(didCompleteLoginProcess: {
+                self.vm.isUserCurrentlyLoggedOut = false
+                self.vm.fetchCurrentUser()
+            })
         }
     }
     
@@ -132,7 +149,7 @@ struct MainMessagesView: View {
                             .font(.system(size: 32))
                             .padding(8)
                             .overlay(RoundedRectangle(cornerRadius: 44)
-                                        .stroke(Color(.label), lineWidth: 1)
+                                .stroke(Color(.label), lineWidth: 1)
                             )
                         
                         
@@ -156,9 +173,11 @@ struct MainMessagesView: View {
         }
     }
     
+    @State var shouldShowNewMessageScreen = false
+    
     private var newMessageButton: some View {
         Button {
-            
+            shouldShowNewMessageScreen.toggle()
         } label: {
             HStack {
                 Spacer()
@@ -168,16 +187,20 @@ struct MainMessagesView: View {
             }
             .foregroundColor(.white)
             .padding(.vertical)
-                .background(Color.blue)
-                .cornerRadius(32)
-                .padding(.horizontal)
-                .shadow(radius: 15)
+            .background(Color.blue)
+            .cornerRadius(32)
+            .padding(.horizontal)
+            .shadow(radius: 15)
+        }
+        .fullScreenCover(isPresented: $shouldShowNewMessageScreen){
+            NewMessageView()
         }
     }
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            MainMessagesView()
-        }
+    
+    
+}
+struct MainMessagesView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainMessagesView()
     }
-
 }
