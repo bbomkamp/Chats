@@ -116,6 +116,8 @@ struct MainMessagesView: View {
             .overlay(
                 newMessageButton, alignment: .bottom)
             .navigationBarHidden(true)
+            .padding(.top, -20)
+
         }
     }
     
@@ -156,7 +158,7 @@ struct MainMessagesView: View {
             } label: {
                 Image(systemName: "gear")
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(Color(.label))
+                    .foregroundColor(Color.blue)
             }
         }
         .padding()
@@ -267,8 +269,6 @@ struct MainMessagesView: View {
 struct MainMessagesView_Previews: PreviewProvider {
     static var previews: some View {
         MainMessagesView()
-            .preferredColorScheme(.dark)
         
-        MainMessagesView()
     }
 }

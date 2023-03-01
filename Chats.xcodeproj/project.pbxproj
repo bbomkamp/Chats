@@ -18,6 +18,7 @@
 		40CB3DA929AD82FA00699E90 /* MainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CB3DA829AD82FA00699E90 /* MainMessagesView.swift */; };
 		40CB3DAC29AD8E4F00699E90 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CB3DAB29AD8E4F00699E90 /* FirebaseManager.swift */; };
 		40CB3DAF29AD95AE00699E90 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 40CB3DAE29AD95AE00699E90 /* SDWebImageSwiftUI */; };
+		40DDA35A29B006B500CDDF8A /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DDA35929B006B500CDDF8A /* SplashScreenView.swift */; };
 		40E214BF29AF1B70008C1BB8 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E214BE29AF1B70008C1BB8 /* ChatMessage.swift */; };
 		40E214C129AF1B85008C1BB8 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E214C029AF1B85008C1BB8 /* RecentMessage.swift */; };
 		40E214C329AF1BC7008C1BB8 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E214C229AF1BC7008C1BB8 /* FirebaseConstants.swift */; };
@@ -40,6 +41,7 @@
 		40704ECB29A9C6E2008E8BAE /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		40CB3DA829AD82FA00699E90 /* MainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesView.swift; sourceTree = "<group>"; };
 		40CB3DAB29AD8E4F00699E90 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		40DDA35929B006B500CDDF8A /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		40E214BE29AF1B70008C1BB8 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		40E214C029AF1B85008C1BB8 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		40E214C229AF1BC7008C1BB8 /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				40704EB429A9B176008E8BAE /* Assets.xcassets */,
 				40704EB629A9B176008E8BAE /* Preview Content */,
 				40704ECB29A9C6E2008E8BAE /* ImagePicker.swift */,
+				40DDA35929B006B500CDDF8A /* SplashScreenView.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				40704EB329A9B176008E8BAE /* LoginView.swift in Sources */,
 				40E214C329AF1BC7008C1BB8 /* FirebaseConstants.swift in Sources */,
 				40704EB129A9B176008E8BAE /* ChatsApp.swift in Sources */,
+				40DDA35A29B006B500CDDF8A /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

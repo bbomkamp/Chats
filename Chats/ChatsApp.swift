@@ -9,30 +9,41 @@
 import SwiftUI
 import FirebaseCore
 
-// This code defines a class called "AppDelegate" that conforms to the "UIApplicationDelegate" protocol.
-class AppDelegate: NSObject, UIApplicationDelegate {
-    
-    // A function that is called when the application finishes launching.
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // Returns true to indicate that the application has finished launching.
+import SwiftUI
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDelegate {
+    var window: UIWindow?
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        // Initialize the window with the scene's UIWindowScene
+        guard let windowScene = scene as? UIWindowScene else { return }
+        window = UIWindow(windowScene: windowScene)
+        
+        // Set the background color of the window
+        window?.backgroundColor = UIColor(named: "white")
+    }
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let splashScreenView = SplashScreenView()
+        let rootView = UIHostingController(rootView: splashScreenView)
+        window?.rootViewController = rootView
+        window?.makeKeyAndVisible()
         return true
     }
+
 }
 
-// This code defines a struct called "ChatsApp" that conforms to the "App" protocol in SwiftUI.
+
+// ChatsApp.swift
+
 @main
 struct ChatsApp: App {
-    
-    // An instance of the "AppDelegate" class.
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
-    // The body of the "ChatsApp" struct, which defines the structure and behavior of the app.
+    @UIApplicationDelegateAdaptor(SceneDelegate.self) var delegate
+
     var body: some Scene {
-        // A window group that contains the app's main user interface.
         WindowGroup {
-            // The initial view that the user sees when the app is launched.
-            MainMessagesView()
+            SplashScreenView()
         }
     }
 }

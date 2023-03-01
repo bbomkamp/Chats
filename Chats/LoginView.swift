@@ -19,92 +19,128 @@ struct LoginView: View {
     @State private var shouldShowImagePicker = false
     
     var body: some View {
+        
         NavigationView {
-            ScrollView {
-                
-                VStack(spacing: 16) {
-                    Picker(selection: $isLoginMode, label: Text("Picker here")) {
-                        Text("Login")
-                            .tag(true)
-                        Text("Create Account")
-                            .tag(false)
-                    }.pickerStyle(SegmentedPickerStyle())
+            
+            ZStack{
+                                
+                ScrollView {
+                    
+                    VStack(spacing: 16) {
                         
-                    if !isLoginMode {
-                        Button {
-                            shouldShowImagePicker.toggle()
-                        } label: {
-                            
-                            VStack {
-                                if let image = self.image {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 128, height: 128)
-                                        .cornerRadius(64)
-                                } else {
-                                    Image(systemName: "person.fill")
-                                        .font(.system(size: 64))
-                                        .padding()
-                                        .foregroundColor(Color(.label))
-                                }
-                            }
-                            .overlay(RoundedRectangle(cornerRadius: 64)
+                        Image("Logo")
+                            .resizable()
+                            .frame(width: 90, height: 90)
+                        
+                        
+                        Picker(selection: $isLoginMode, label: Text("Picker here")) {
+                            Text("Login")
+                                .tag(true)
+                            Text("Create Account")
+                                .tag(false)
+                        }.pickerStyle(SegmentedPickerStyle())
+                        
+                        if !isLoginMode {
+                            Button {
+                                shouldShowImagePicker.toggle()
+                            } label: {
+                                ZStack (alignment: .bottomTrailing) {
+                                    VStack {
+                                        if let image = self.image {
+                                            Image(uiImage: image)
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 128, height: 128)
+                                                .cornerRadius(64)
+                                        } else {
+                                            Image("DefaultProfilePicture")
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 128, height: 128)
+                                                .cornerRadius(64)
+                                        }
+                                        
+                                    }
+                                    .overlay(RoundedRectangle(cornerRadius: 64)
                                         .stroke(Color.black, lineWidth: 3)
-                            )
+                                             
+                                    )
+                                    plusImage()}
+                                
+                            }
+                        }
+                        
+                        Group {
+                            TextField("Email", text: $email)
+                                .keyboardType(.emailAddress)
+                                .autocapitalization(.none)
+                            SecureField("Password", text: $password)
+                        }
+                        .padding(12)
+                        .background(Color.white)
+                        
+                        Button {
+                            handleAction()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text(isLoginMode ? "Log In" : "Create Your Account")
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 10)
+                                    .font(.system(size: 14, weight: .semibold))
+                                Spacer()
+                            }.background(Color.blue)
+                                .cornerRadius(30)
                             
                         }
+                        //
+                        //                    Text(self.loginStatusMessage)
+                        //                        .foregroundColor(.red)
                     }
+                    .padding()
                     
-                    Group {
-                        TextField("Email", text: $email)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                        SecureField("Password", text: $password)
-                    }
-                    .padding(12)
-                    .background(Color.white)
                     
-                    Button {
-                        handleAction()
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text(isLoginMode ? "Log In" : "Create Account")
-                                .foregroundColor(.white)
-                                .padding(.vertical, 10)
-                                .font(.system(size: 14, weight: .semibold))
-                            Spacer()
-                        }.background(Color.blue)
-                        
-                    }
-                    
-                    Text(self.loginStatusMessage)
-                        .foregroundColor(.red)
                 }
-                .padding()
+                
+                //            .navigationTitle(isLoginMode ? "Log In" : "Create Account")
+                .background(Color(.init(white: 0, alpha: 0.05))
+                    .ignoresSafeArea())
+                
                 
             }
-            .navigationTitle(isLoginMode ? "Log In" : "Create Account")
-            .background(Color(.init(white: 0, alpha: 0.05))
-                            .ignoresSafeArea())
+            
+            .navigationViewStyle(StackNavigationViewStyle())
+            .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
+                ImagePicker(image: $image)
+                    .ignoresSafeArea()
+                
+                
+                
+                
+                
+            }
+            
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
-            ImagePicker(image: $image)
-                .ignoresSafeArea()
-        }
+        
     }
     
     @State var image: UIImage?
     
+    fileprivate func plusImage() -> some View {
+        return Image(systemName: "plus")
+            .frame(width: 30, height: 30)
+            .foregroundColor(.white)
+            .background(Color.green)
+            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+    }
+    
     private func handleAction() {
         if isLoginMode {
-//            print("Should log into Firebase with existing credentials")
+            //            print("Should log into Firebase with existing credentials")
             loginUser()
         } else {
             createNewAccount()
-//            print("Register a new account inside of Firebase Auth and then store image in Storage somehow....")
+            //            print("Register a new account inside of Firebase Auth and then store image in Storage somehow....")
         }
     }
     
@@ -189,6 +225,21 @@ struct LoginView: View {
             }
     }
 }
+
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+        
+        let r = Double((rgbValue & 0xFF0000) >> 16) / 255.0
+        let g = Double((rgbValue & 0x00FF00) >> 8) / 255.0
+        let b = Double(rgbValue & 0x0000FF) / 255.0
+        
+        self.init(red: r, green: g, blue: b)
+    }
+}
+
 
 struct ContentView_Previews1: PreviewProvider {
     static var previews: some View {
