@@ -32,9 +32,7 @@ struct ChatsApp: App {
         // A window group that contains the app's main user interface.
         WindowGroup {
             // The initial view that the user sees when the app is launched.
-            LoginView(didCompleteLoginProcess: {
-                
-            })
+            MainMessagesView()
         }
     }
 }

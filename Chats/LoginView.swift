@@ -15,6 +15,7 @@ struct LoginView: View {
     @State private var isLoginMode = false
     @State private var email = ""
     @State private var password = ""
+    
     @State private var shouldShowImagePicker = false
     
     var body: some View {
@@ -91,6 +92,7 @@ struct LoginView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
             ImagePicker(image: $image)
+                .ignoresSafeArea()
         }
     }
     
@@ -98,9 +100,11 @@ struct LoginView: View {
     
     private func handleAction() {
         if isLoginMode {
+//            print("Should log into Firebase with existing credentials")
             loginUser()
         } else {
             createNewAccount()
+//            print("Register a new account inside of Firebase Auth and then store image in Storage somehow....")
         }
     }
     
@@ -115,6 +119,7 @@ struct LoginView: View {
             print("Successfully logged in as user: \(result?.user.uid ?? "")")
             
             self.loginStatusMessage = "Successfully logged in as user: \(result?.user.uid ?? "")"
+            
             self.didCompleteLoginProcess()
         }
     }
@@ -123,7 +128,7 @@ struct LoginView: View {
     
     private func createNewAccount() {
         if self.image == nil {
-            self.loginStatusMessage = "You Must Select a Profile Picture"
+            self.loginStatusMessage = "You must select an avatar image"
             return
         }
         
@@ -137,6 +142,7 @@ struct LoginView: View {
             print("Successfully created user: \(result?.user.uid ?? "")")
             
             self.loginStatusMessage = "Successfully created user: \(result?.user.uid ?? "")"
+            
             self.persistImageToStorage()
         }
     }
@@ -158,7 +164,7 @@ struct LoginView: View {
                 }
                 
                 self.loginStatusMessage = "Successfully stored image with url: \(url?.absoluteString ?? "")"
-                print(url?.absoluteString as Any)
+                print(url?.absoluteString ?? "")
                 
                 guard let url = url else { return }
                 self.storeUserInformation(imageProfileUrl: url)
@@ -168,8 +174,8 @@ struct LoginView: View {
     
     private func storeUserInformation(imageProfileUrl: URL) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        let userData = ["email": self.email, "uid": uid, "profileImageUrl": imageProfileUrl.absoluteString]
-        FirebaseManager.shared.firestore.collection("users")
+        let userData = [FirebaseConstants.email: self.email, FirebaseConstants.uid: uid, FirebaseConstants.profileImageUrl: imageProfileUrl.absoluteString]
+        FirebaseManager.shared.firestore.collection(FirebaseConstants.users)
             .document(uid).setData(userData) { err in
                 if let err = err {
                     print(err)
@@ -177,13 +183,14 @@ struct LoginView: View {
                     return
                 }
                 
-                print("Success - User Created")
+                print("Success")
+                
                 self.didCompleteLoginProcess()
             }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ContentView_Previews1: PreviewProvider {
     static var previews: some View {
         LoginView(didCompleteLoginProcess: {
             
