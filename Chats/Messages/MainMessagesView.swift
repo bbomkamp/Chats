@@ -59,14 +59,16 @@ class MainMessagesViewModel: ObservableObject {
                     }
                     
                     do {
-                        if let rm = try? change.document.data(as: RecentMessage.self) {
+                        if let rm = try change.document.data(as: RecentMessage?.self) {
                             self.recentMessages.insert(rm, at: 0)
                         }
+                    } catch {
+                        print(error)
                     }
                 })
             }
     }
-    
+
     func fetchCurrentUser() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
@@ -116,8 +118,6 @@ struct MainMessagesView: View {
             .overlay(
                 newMessageButton, alignment: .bottom)
             .navigationBarHidden(true)
-            .padding(.top, -20)
-
         }
     }
     
@@ -158,7 +158,7 @@ struct MainMessagesView: View {
             } label: {
                 Image(systemName: "gear")
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(Color.blue)
+                    .foregroundColor(Color(.label))
             }
         }
         .padding()
@@ -253,7 +253,7 @@ struct MainMessagesView: View {
                 .shadow(radius: 15)
         }
         .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
-            NewMessageView(didSelectNewUser: { user in
+            CreateNewMessageView(didSelectNewUser: { user in
                 print(user.email)
                 self.shouldNavigateToChatLogView.toggle()
                 self.chatUser = user

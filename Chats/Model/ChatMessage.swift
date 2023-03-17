@@ -19,7 +19,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct ChatMessage: Codable, Identifiable {
-    let id: String
+    @DocumentID var id: String?
     let fromId, toId, text: String
     let timestamp: Date
 }

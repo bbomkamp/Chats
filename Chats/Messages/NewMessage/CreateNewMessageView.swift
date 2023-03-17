@@ -22,38 +22,36 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 class CreateNewMessageViewModel: ObservableObject {
-    // Published property wrapper to track changes and update the view
+    
     @Published var users = [ChatUser]()
     @Published var errorMessage = ""
-
+    
     init() {
         fetchAllUsers()
     }
-
+    
     private func fetchAllUsers() {
-        // Access the Firebase Firestore database and fetch all users
         FirebaseManager.shared.firestore.collection("users")
             .getDocuments { documentsSnapshot, error in
                 if let error = error {
-                    // If there was an error, set the error message and print it to the console
                     self.errorMessage = "Failed to fetch users: \(error)"
                     print("Failed to fetch users: \(error)")
                     return
                 }
-                // If successful, loop through all documents and convert them to ChatUser objects
+                
                 documentsSnapshot?.documents.forEach({ snapshot in
                     let user = try? snapshot.data(as: ChatUser.self)
-                    // If the user is not the current user, append the user to the array of users to display
                     if user?.uid != FirebaseManager.shared.auth.currentUser?.uid {
                         self.users.append(user!)
                     }
+                    
                 })
             }
     }
 }
 
-struct NewMessageView: View {
-    // Closure to execute when the user selects a new user
+struct CreateNewMessageView: View {
+    
     let didSelectNewUser: (ChatUser) -> ()
     
     @Environment(\.presentationMode) var presentationMode
@@ -63,17 +61,14 @@ struct NewMessageView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                Text(vm.errorMessage) // Display any error message, if there was an error
-
-                // Loop through all users and display their profile picture and email in a button
+                Text(vm.errorMessage)
+                
                 ForEach(vm.users) { user in
                     Button {
-                        // Dismiss the view and execute the didSelectNewUser closure with the selected user
                         presentationMode.wrappedValue.dismiss()
                         didSelectNewUser(user)
                     } label: {
                         HStack(spacing: 16) {
-                            // Display the user's profile picture
                             WebImage(url: URL(string: user.profileImageUrl))
                                 .resizable()
                                 .scaledToFill()
@@ -83,19 +78,16 @@ struct NewMessageView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 50)
                                             .stroke(Color(.label), lineWidth: 2)
                                 )
-                            // Display the user's email
                             Text(user.email)
                                 .foregroundColor(Color(.label))
                             Spacer()
                         }.padding(.horizontal)
                     }
-                    // Add a divider between each user
                     Divider()
                         .padding(.vertical, 8)
                 }
-            }.navigationTitle("New Message") // Set the navigation title
+            }.navigationTitle("New Message")
                 .toolbar {
-                    // Add a cancel button to the leading side of the navigation bar
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         Button {
                             presentationMode.wrappedValue.dismiss()
@@ -107,6 +99,7 @@ struct NewMessageView: View {
         }
     }
 }
+
 
 struct NewMessageView_Previews: PreviewProvider {
     static var previews: some View {
