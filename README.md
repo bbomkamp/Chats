@@ -6,9 +6,13 @@ This is a simple chat app for iOS built using Swift and Firebase. The app allows
 
 https://user-images.githubusercontent.com/37642026/230232466-30833787-fedd-47ac-8a6e-44896777fbfd.mp4
 
-![Simulator Screenshot - iPhone 14 Pro - 2023-04-05 at 18 10 47](https://user-images.githubusercontent.com/37642026/230232848-f29fc279-fb69-49ea-a931-8c25f7e14f13.png){: style="width:83px"}
-![Simulator Screenshot - iPhone 14 Pro - 2023-04-05 at 18 10 54](https://user-images.githubusercontent.com/37642026/230232877-4402bc9a-29f4-47a4-8198-bec8152764bb.png)
-![Simulator Screenshot - iPhone 14 Pro - 2023-04-05 at 18 13 01](https://user-images.githubusercontent.com/37642026/230232898-41035e63-ea14-4fb6-9a6a-1b2a444f1363.png)
+<table>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/37642026/230232848-f29fc279-fb69-49ea-a931-8c25f7e14f13.png" width="200"></td>
+    <td><img src="https://user-images.githubusercontent.com/37642026/230232877-4402bc9a-29f4-47a4-8198-bec8152764bb.png" width="200"></td>
+    <td><img src="https://user-images.githubusercontent.com/37642026/230232898-41035e63-ea14-4fb6-9a6a-1b2a444f1363.png" width="200"></td>
+  </tr>
+</table>
 
 
 
