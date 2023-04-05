@@ -3,16 +3,21 @@
 This is a simple chat app for iOS built using Swift and Firebase. The app allows users to log in or create an account, and then chat with other users who are also logged in.
 
 
+<div style="text-align:center;">
+  <video width="300" controls>
+    <source src="https://user-images.githubusercontent.com/37642026/230232466-30833787-fedd-47ac-8a6e-44896777fbfd.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <br>
+  <table>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/37642026/230232848-f29fc279-fb69-49ea-a931-8c25f7e14f13.png" width="200"></td>
+      <td><img src="https://user-images.githubusercontent.com/37642026/230232877-4402bc9a-29f4-47a4-8198-bec8152764bb.png" width="200"></td>
+      <td><img src="https://user-images.githubusercontent.com/37642026/230232898-41035e63-ea14-4fb6-9a6a-1b2a444f1363.png" width="200"></td>
+    </tr>
+  </table>
+</div>
 
-https://user-images.githubusercontent.com/37642026/230232466-30833787-fedd-47ac-8a6e-44896777fbfd.mp4
-
-<table>
-  <tr>
-    <td><img src="https://user-images.githubusercontent.com/37642026/230232848-f29fc279-fb69-49ea-a931-8c25f7e14f13.png" width="200"></td>
-    <td><img src="https://user-images.githubusercontent.com/37642026/230232877-4402bc9a-29f4-47a4-8198-bec8152764bb.png" width="200"></td>
-    <td><img src="https://user-images.githubusercontent.com/37642026/230232898-41035e63-ea14-4fb6-9a6a-1b2a444f1363.png" width="200"></td>
-  </tr>
-</table>
 
 
 
