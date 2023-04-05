@@ -2,13 +2,8 @@
 
 This is a simple chat app for iOS built using Swift and Firebase. The app allows users to log in or create an account, and then chat with other users who are also logged in.
 
-
+https://user-images.githubusercontent.com/37642026/230232466-30833787-fedd-47ac-8a6e-44896777fbfd.mp4
 <div style="margin: 0 auto; width: 300px;">
-  <video width="300" controls>
-    <source src="https://user-images.githubusercontent.com/37642026/230232466-30833787-fedd-47ac-8a6e-44896777fbfd.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <br>
   <table>
     <tr>
       <td><img src="https://user-images.githubusercontent.com/37642026/230232848-f29fc279-fb69-49ea-a931-8c25f7e14f13.png" width="200"></td>
