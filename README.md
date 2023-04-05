@@ -34,10 +34,10 @@ pod install
 
 ## Files
 
-- **FirebaseManager.swift**: Defines a class called FirebaseManager that manages Firebase authentication, Firebase Storage, and Firestore database. It also defines a shared instance of FirebaseManager.
-- **LoginView.swift**: Defines the login view of the app using SwiftUI. The view allows users to log in or create a new account, and also allows users to select a profile picture.
-- **MainMessagesView.swift**: Defines the main messages view of the app using SwiftUI. It displays a list of recent messages, a custom navigation bar, and a new message button. The view also handles user sign out and navigation to the chat log view.
-- **CreateNewMessageView.swift**: Defines the view for creating a new message. The view displays a list of users fetched from Firestore, allowing the user to select a recipient for a new chat message.
+- **`FirebaseManager.swift`**: Defines a class called FirebaseManager that manages Firebase authentication, Firebase Storage, and Firestore database. It also defines a shared instance of FirebaseManager.
+- **`LoginView.swift`**: Defines the login view of the app using SwiftUI. The view allows users to log in or create a new account, and also allows users to select a profile picture.
+- **`MainMessagesView.swift`**: Defines the main messages view of the app using SwiftUI. It displays a list of recent messages, a custom navigation bar, and a new message button. The view also handles user sign out and navigation to the chat log view.
+- **`CreateNewMessageView`.swift**: Defines the view for creating a new message. The view displays a list of users fetched from Firestore, allowing the user to select a recipient for a new chat message.
 
 
 ## Usage
