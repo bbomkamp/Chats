@@ -1,4 +1,4 @@
-# # Chat App for iOS
+## Chat App for iOS
 
 This is a simple chat app for iOS built using Swift and Firebase. The app allows users to log in or create an account, and then chat with other users who are also logged in.
 
